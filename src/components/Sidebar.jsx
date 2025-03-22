@@ -176,7 +176,7 @@ export default function Sidebar() {
 
       <textarea
         placeholder={
-          "List your colors\n\n#ffffff\n#000000\n#ff0000\n#00ff00\n#0000ff"
+          "List your colors\n\nred\n#00ff00\nrgb(0,0,255)\noklab(0.3 -0.2 0.1)\ncolor(--hsv 60 1 1)\nhsl(349.52 100% 87.65%)\noklab(0.42 0.16 -0.10)\ncolor(srgb-linear 1 0 1)\nlab(53.59 0 0)\ncolor(xyz-d50 0.58 0.49 0.05)\nhwb(180 0% 0%)\ncolor(--hsi 120 1 0.17)\ncolor(prophoto-rgb 0.23 0.09 0.40)\ncolor(a98-rgb 0.96 0.84 0.2)"
         }
         value={colors}
         rows={10}
