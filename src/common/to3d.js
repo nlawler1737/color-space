@@ -101,9 +101,9 @@ export function lrgbTo3d(lrgb) {
 export function oklabTo3d(oklab) {
   const { l, a, b } = oklab;
   return {
-    x: a + 0.5,
+    x: (a + 0.4) / 0.8,
     y: l,
-    z: 0.5 - b,
+    z: (0.4 - b) / 0.8,
   };
 }
 

@@ -98,11 +98,11 @@ export function hslColorSamples() {
 export function oklabColorSamples() {
   /** @type {import("culori").Oklab[]} */
   const colors = [];
-  const steps = 10;
+  const steps = 16;
 
   for (let l = 0; l <= 1; l += 1 / steps) {
-    for (let a = -0.4; a <= 0.4; a += 0.4 / steps) {
-      for (let b = -0.4; b <= 0.4; b += 0.4 / steps) {
+    for (let a = -0.4; a <= 0.4; a += 0.8 / steps) {
+      for (let b = -0.4; b <= 0.4; b += 0.8 / steps) {
         colors.push({ l, a, b, mode: "oklab" });
       }
     }
