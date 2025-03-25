@@ -14,11 +14,6 @@ export default function GamutDisplay({ mode, colors }) {
   return (
     <div
       className="color-space"
-      style={{
-        border: "1px solid black",
-        height: "300px",
-        width: "300px",
-      }}
     >
       <Viewer>
         <Graph
