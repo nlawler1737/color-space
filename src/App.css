@@ -24,20 +24,27 @@
   position: relative;
 }
 
-#graph-container {
-  padding: 1rem;
+#content > div:has(#graph-container) {
   flex-grow: 1;
   display: flex;
-  flex-wrap: wrap;
+  height: fit-content;
+}
+
+#graph-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 10px;
+  padding: 1rem;
   gap: 10px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 #scroll-area {
   position: sticky;
   flex-shrink: 0;
-  top:0;
+  top: 0;
   right: 0;
   width: 4rem;
   height: 100%;
@@ -60,17 +67,9 @@
 
 .color-space {
   position: relative;
-  width: 400px;
-  height: 400px;
-  border: 1px solid black;
-}
-.color-space:active {
-  position: absolute;
-  width: min(calc(100% - 4rem), calc(100vmin - 4rem));
-  height: auto;
+  min-width: 400px;
   aspect-ratio: 1;
-  background-color: var(--color-bg);
-  z-index: 999;
+  border: 1px solid black;
 }
 
 .color-space > .title {
