@@ -28,11 +28,11 @@ function App() {
     <>
       <Sidebar />
       <div id="content">
-        <div>
-          <div id="graph-container">{graphs}</div>
-        </div>
         <div id="scroll-area">
           <span>Scroll</span>
+        </div>
+        <div>
+          <div id="graph-container">{graphs}</div>
         </div>
       </div>
     </>

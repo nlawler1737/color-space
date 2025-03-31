@@ -154,3 +154,18 @@ export function luvTo3d(luv) {
 
   return { x: normalizedX, y: normalizedY, z: 1 - normalizedZ };
 }
+
+
+export function cubehelixTo3d(cubehelix) {
+  const { h, s, l } = { h: 0, s: 0, l: 0, ...cubehelix };
+  const normalizedS = s / 4.614;
+  const angle = (h / 360) * 2 * Math.PI;
+  const radius = normalizedS;
+  const x = radius * Math.cos(angle);
+  const z = radius * Math.sin(angle);
+  return {
+    x: (x + 1) / 2,
+    y: l,
+    z: (1 - z) / 2,
+  };
+}

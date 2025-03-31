@@ -202,3 +202,19 @@ export function luvColorSamples() {
   }
   return colors;
 }
+
+export function cubehelixColorSamples() {
+  /** @type {import("culori").Cubehelix[]} */
+  const colors = [];
+  const steps = 16;
+
+  for (let h = 0; h <= 360; h += 1) {
+    for (let s = 0; s <= 4.614; s += 4.614 / steps) {
+      for (let l = 0; l <= 1; l += 1 / steps) {
+        colors.push({ h, s, l, mode: "cubehelix" });
+      }
+    }
+  }
+
+  return colors;
+}

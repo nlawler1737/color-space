@@ -1,8 +1,8 @@
-import { hsiTo3d, hslTo3d, hsvTo3d, hwbTo3d, labTo3d, lchTo3d, luvTo3d, oklabTo3d, rgbTo3d, xyzTo3d } from "./to3d";
-import { coneColorSamples, cubeColorSamples, hsiColorSamples, hslColorSamples, lab65ColorSamples, labColorSamples, lch65ColorSamples, lchColorSamples, luvColorSamples, oklabColorSamples, rgbColorSamples, xyzd50ColorSamples } from "./utils";
+import { cubehelixTo3d, hsiTo3d, hslTo3d, hsvTo3d, hwbTo3d, labTo3d, lchTo3d, luvTo3d, oklabTo3d, rgbTo3d, xyzTo3d } from "./to3d";
+import { coneColorSamples, cubeColorSamples, cubehelixColorSamples, hsiColorSamples, hslColorSamples, lab65ColorSamples, labColorSamples, lch65ColorSamples, lchColorSamples, luvColorSamples, oklabColorSamples, rgbColorSamples, xyzd50ColorSamples } from "./utils";
 
 /**
- * @type {Record<import("culori").Mode, { name: string, mode: import("culori").Mode, to3d: (color: import("culori").Color) => { x: number, y: number, z: number } | null, samples: () => import("culori").Color[] }>}
+ * @type {Record<import("culori").Mode, { name: string, mode: import("culori").Mode, to3d: (color: import("culori").Color) => { x: number, y: number, z: number } | null, samples: Color[] }>}
  */
 export const colorSpaces = {
   // rgb model
@@ -177,8 +177,8 @@ export const colorSpaces = {
   cubehelix: {
     mode: "cubehelix",
     name: "Cubehelix",
-    to3d: () => ({x:0,y:0,z:0}),
-    samples: null,
+    to3d: cubehelixTo3d,
+    samples: cubehelixColorSamples(),
   },
 };
 
