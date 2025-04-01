@@ -11,6 +11,7 @@ import {
 } from "../stores/graphSlice";
 import Eye from "./icons/Eye";
 import Cube from "./icons/Cube";
+import "./Sidebar.css"
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
