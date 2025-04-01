@@ -9,8 +9,11 @@ import {
   setSamplesKey,
   toggleVisibleColorSpace,
 } from "../stores/graphSlice";
+import Eye from "./icons/Eye";
+import Cube from "./icons/Cube";
 
 export default function Sidebar() {
+  const [isOpen, setIsOpen] = useState(true);
   const userPointSize = useSelector((state) => state.graph.userPointSize);
   const samplePointSize = useSelector((state) => state.graph.samplePointSize);
   const samplesKey = useSelector((state) => state.graph.samplesKey);
@@ -23,43 +26,39 @@ export default function Sidebar() {
 
   const colorSpaceInputs = useMemo(() => {
     return Object.values(colorSpaces).map(({ mode, name, samples }) => (
-      <div
-        key={mode}
-        style={{
-          display: "grid",
-          gridTemplateColumns: "2fr 20px 20px",
-          textAlign: "left",
-        }}
-      >
-        <code>{name}</code>
-        <input
-          type="checkbox"
-          name="color-space-visible"
-          style={{ margin: 2 }}
-          checked={selectedColorSpaces.includes(mode)}
-          onChange={() => {
-            dispatch(toggleVisibleColorSpace(mode));
-          }}
-        />
-        {samples ? (
-          <input
-            type="radio"
-            name="color-space-preview"
-            disabled={samples == null}
-            checked={samplesKey === mode}
-            style={{ margin: 2 }}
-            onChange={() => {
-              dispatch(setSamplesKey(mode));
+      <div key={mode} className="color-space-item">
+        <span>
+          <code>{name}</code>
+        </span>
+        <span>
+          <button
+            className={`select-button color-space-visible-button ${
+              selectedColorSpaces.includes(mode) ? "selected" : ""
+            }`}
+            onClick={() => {
+              dispatch(toggleVisibleColorSpace(mode));
             }}
+          >
+            <Cube />
+          </button>
+          <div className="vr"></div>
+          <button
+            className={`select-button preview-button ${
+              samplesKey === mode ? "selected" : ""
+            }`}
+            disabled={samples == null}
+            onChange={() => {}}
             onClick={() => {
               if (samplesKey === mode) {
                 dispatch(setSamplesKey(null));
+              } else {
+                dispatch(setSamplesKey(mode));
               }
             }}
-          />
-        ) : (
-          <span className="radio-disabled"></span>
-        )}
+          >
+            <Eye width="full" height="full" />
+          </button>
+        </span>
       </div>
     ));
   }, [selectedColorSpaces, samplesKey, dispatch]);
@@ -94,98 +93,55 @@ export default function Sidebar() {
       .filter((a) => a != null);
   }
 
-  return (
-    <div id="sidebar">
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          textAlign: "left",
-          gap: "0px 2rem",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 20px 20px",
-            textAlign: "center",
-          }}
-        >
-          <code
-            style={{ fontWeight: "bolder" }}
-            title="Name of the color space"
-          >
-            Name
-          </code>
-          <code style={{ fontWeight: "bolder" }} title="Visible">
-            V
-          </code>
-          <code style={{ fontWeight: "bolder" }} title="Preview">
-            P
-          </code>
-        </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "2fr 20px 20px",
-            textAlign: "center",
-          }}
-        >
-          <code
-            style={{ fontWeight: "bolder" }}
-            title="Name of the color space"
-          >
-            Name
-          </code>
-          <code style={{ fontWeight: "bolder" }} title="Visible">
-            V
-          </code>
-          <code style={{ fontWeight: "bolder" }} title="Preview">
-            P
-          </code>
-        </div>
-      </div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          textAlign: "left",
-          gap: "0px 2rem",
-        }}
-      >
-        {colorSpaceInputs}
-      </div>
-      <div>
-        <input
-          type="range"
-          step="0.0001"
-          min="0.0001"
-          max="0.3"
-          value={userPointSize}
-          onChange={(e) => dispatch(setUserPointSize(+e.target.value))}
-        ></input>
-        <input
-          type="range"
-          step="0.0001"
-          min="0.0001"
-          max="0.3"
-          value={samplePointSize}
-          onChange={(e) => dispatch(setSamplePointSize(+e.target.value))}
-        ></input>
-      </div>
+  function handleSidebarToggle() {
+    setIsOpen(!isOpen);
+  }
 
-      <textarea
-        placeholder={
-          "List your colors\n\nred\n#00ff00\nrgb(0,0,255)\noklab(0.3 -0.2 0.1)\ncolor(--hsv 60 1 1)\nhsl(349.52 100% 87.65%)\noklab(0.42 0.16 -0.10)\ncolor(srgb-linear 1 0 1)\nlab(53.59 0 0)\ncolor(xyz-d50 0.58 0.49 0.05)\nhwb(180 0% 0%)\ncolor(--hsi 120 1 0.17)\ncolor(prophoto-rgb 0.23 0.09 0.40)\ncolor(a98-rgb 0.96 0.84 0.2)"
-        }
-        value={colors}
-        rows={10}
-        cols={20}
-        onChange={handleColorsChange}
-        spellCheck="false"
-      ></textarea>
-      <div>
-        <code>Accuracy: ¯\_(ツ)_/¯</code>
+  return (
+    <div id="sidebar" className={isOpen ? "" : "closed"}>
+      <button id="sidebar-toggle" onClick={() => handleSidebarToggle()}>
+        {isOpen ? "<" : ">"}
+      </button>
+      <div id="sidebar-content">
+        <textarea
+          placeholder={
+            "List your colors\n\nred\n#00ff00\nrgb(0,0,255)\noklab(0.3 -0.2 0.1)\ncolor(--hsv 60 1 1)\nhsl(349.52 100% 87.65%)\noklab(0.42 0.16 -0.10)\ncolor(srgb-linear 1 0 1)\nlab(53.59 0 0)\ncolor(xyz-d50 0.58 0.49 0.05)\nhwb(180 0% 0%)\ncolor(--hsi 120 1 0.17)\ncolor(prophoto-rgb 0.23 0.09 0.40)\ncolor(a98-rgb 0.96 0.84 0.2)"
+          }
+          value={colors}
+          rows={10}
+          onChange={handleColorsChange}
+          spellCheck="false"
+        ></textarea>
+        <div>
+          <label htmlFor="user-point-size">
+            <code>User Point Size</code>
+          </label>
+          <input
+            type="range"
+            step="0.0001"
+            min="0.0001"
+            max="0.3"
+            value={userPointSize}
+            onChange={(e) => dispatch(setUserPointSize(+e.target.value))}
+            style={{ width: "90%" }}
+          ></input>
+          <label htmlFor="sample-point-size">
+            <code>Sample Point Size</code>
+          </label>
+          <input
+            type="range"
+            step="0.0001"
+            min="0.0001"
+            max="0.3"
+            value={samplePointSize}
+            onChange={(e) => dispatch(setSamplePointSize(+e.target.value))}
+            style={{ width: "90%" }}
+          ></input>
+        </div>
+        <div className="color-space-input-container">{colorSpaceInputs}</div>
+        <div>
+          <code>Accuracy: ¯\_(ツ)_/¯</code>
+        </div>
       </div>
     </div>
   );
