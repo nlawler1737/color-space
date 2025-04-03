@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Eye({width=16, height=16}) {
+export default function Cone({ width = 16, height = 16 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,10 +12,10 @@ export default function Eye({width=16, height=16}) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="lucide lucide-eye-icon lucide-eye"
+      className="lucide lucide-cone-icon lucide-cone"
     >
-      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-      <circle cx="12" cy="12" r="3" />
+      <path d="m20.9 18.55-8-15.98a1 1 0 0 0-1.8 0l-8 15.98" />
+      <ellipse cx="12" cy="19" rx="9" ry="3" />
     </svg>
   );
 }

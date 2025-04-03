@@ -16,6 +16,7 @@ function App() {
       return (
         <GamutDisplay
           key={mode}
+          colorspace={mode}
           mode={mode}
           colors={userColors}
           samples={samplesKey}

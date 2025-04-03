@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { colorSpaces } from "../common/colorspaces";
 
+const possibleColorSpaces = Object.entries(colorSpaces).reduce((acc, [mode, value]) => {
+  for (const space in value.spaces) {
+    acc.push(`${mode}-${space}`);
+  }
+  return acc
+}, []);
+
 export const graphSlice = createSlice({
   name: "graph",
   initialState: {
@@ -8,7 +15,7 @@ export const graphSlice = createSlice({
     samplePointSize: 0.01,
     samplesKey: null,
     userColors: [],
-    visibleColorSpaces: ["rgb", "hsv"],
+    visibleColorSpaces: ["rgb-cube", "hsv-cone"],
   },
   reducers: {
     setUserPointSize(state, action) {
@@ -24,11 +31,11 @@ export const graphSlice = createSlice({
       state.userColors = action.payload;
     },
     toggleVisibleColorSpace(state, action) {
-      const mode = action.payload;
-      const index = state.visibleColorSpaces.indexOf(mode);
-      if (index === -1) {
-        state.visibleColorSpaces = Object.keys(colorSpaces).filter(
-          (key) => key === mode || state.visibleColorSpaces.includes(key)
+      const colorspace = action.payload;
+      const index = state.visibleColorSpaces.indexOf(colorspace);
+      if (index === -1) {        
+        state.visibleColorSpaces = possibleColorSpaces.filter(
+          (key) => key === colorspace || state.visibleColorSpaces.includes(key)
         );
       } else {
         state.visibleColorSpaces.splice(index, 1);

@@ -23,17 +23,31 @@
   resize: vertical;
 }
 
+.sidebar-section-title {
+  text-align: left;
+  font-family: monospace;
+  font-weight: 600;
+  font-size: 0.6rem;
+  border-top: solid;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: rgb(95, 95, 95);
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  padding-left: 0.4rem;
+}
+
 .select-button {
   width: 1.5rem;
   height: 1.5rem;
   padding: 0.1rem;
   border: 1px solid rgb(80, 80, 80);
+  border: 1px solid transparent;
   background-color: transparent;
-  color: gray
+  color: gray;
 }
 .select-button.selected {
   color: rgb(178, 110, 255);
-  border: 1px solid rgb(178, 110, 255);
 }
 .select-button:disabled {
   color: rgb(34, 0, 0);
@@ -42,14 +56,11 @@
 div.vr {
   width: 1px;
   height: 1.2rem;
-  margin: 0 0.5rem;
+  margin: 0 0.3rem;
   background: rgb(129, 129, 129);
 }
 
 .color-space-visible-button {
-  border: 1px solid transparent;
-}
-.color-space-visible-button.selected {
   border: 1px solid transparent;
 }
 
@@ -68,4 +79,11 @@ div.vr {
   font-size: 2rem;
   user-select: none;
   background-color: rgb(180, 180, 180);
+}
+
+#sidebar-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

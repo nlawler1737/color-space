@@ -3,7 +3,8 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { colorSpaces } from "../common/colorspaces";
 import { converter } from "culori";
-export default function Graph({ mode, points }) {
+export default function Graph({ colorspace, points }) {
+  const [mode, space] = colorspace.split("-");
   // const { state } = useGlobalState();
   const pointSize = useSelector((state) => state.graph.userPointSize);
   const sampleSize = useSelector((state) => state.graph.samplePointSize);
@@ -21,7 +22,7 @@ export default function Graph({ mode, points }) {
     console.log("changing samples", mode);
     for (let i = 0; i < samples.length; i++) {
       const convertedColor = converter(mode)(samples[i]);
-      const { x, y, z } = colorSpaces[mode].to3d(convertedColor);
+      const { x, y, z } = colorSpaces[mode].spaces[space](convertedColor);
       const color = converter("lrgb")(samples[i]);
       samplePositions[i * 3] = x;
       samplePositions[i * 3 + 1] = y;
@@ -32,7 +33,7 @@ export default function Graph({ mode, points }) {
       sampleColors[i * 3 + 2] = color.b;
     }
     return { samplePositions, sampleColors };
-  }, [mode, samplesKey]);
+  }, [mode, samplesKey, space]);
 
   const { pointPositions, pointColors } = useMemo(() => {
     const pointPositions = new Float32Array(points.length * 3);

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Eye({width=16, height=16}) {
+export default function Cylinder({width=16, height=16}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,10 +12,10 @@ export default function Eye({width=16, height=16}) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="lucide lucide-eye-icon lucide-eye"
+      className="lucide lucide-cylinder-icon lucide-cylinder"
     >
-      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-      <circle cx="12" cy="12" r="3" />
+      <ellipse cx="12" cy="5" rx="9" ry="3" />
+      <path d="M3 5v14a9 3 0 0 0 18 0V5" />
     </svg>
   );
 }
