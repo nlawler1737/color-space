@@ -12,7 +12,7 @@ export default function PointCloud({ positions, colors, size }) {
   return (
     <Points
       positions={positions}
-      frustumCulled
+      frustumCulled={false}
       colors={colors}
       material={material}
     ></Points>

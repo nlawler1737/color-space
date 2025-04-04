@@ -1,3 +1,5 @@
+import { formatColor } from "./utils";
+
 /**
  *
  * @param {import("culori").Rgb} rgb
@@ -157,7 +159,7 @@ export function luvTo3d(luv) {
 
 
 export function cubehelixTo3d(cubehelix) {
-  const { h, s, l } = { h: 0, s: 0, l: 0, ...cubehelix };
+  const { h, s, l } = formatColor("h","s","l",cubehelix);
   const normalizedS = s / 4.614;
   const angle = (h / 360) * 2 * Math.PI;
   const radius = normalizedS;

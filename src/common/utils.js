@@ -8,6 +8,15 @@ export function map(value, inMin, inMax, outMin, outMax) {
   return ((value - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 }
 
+export function formatColor(a,b,c,color) {
+  return {
+    ...color,
+    [a]: color[a] ?? 0,
+    [b]: color[b] ?? 0,
+    [c]: color[c] ?? 0,
+  }
+}
+
 /**
  *
  * @param {import("culori").Color} color
