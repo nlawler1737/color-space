@@ -11,7 +11,11 @@ export default function ThemeSwitcher() {
       <Sun width="100%" height="100%" />
     );
   return (
-    <button className={"toggle-button"} onClick={toggleTheme}>
+    <button
+      className={"toggle-button"}
+      onClick={toggleTheme}
+      aria-label="Toggle theme"
+    >
       {icon}
     </button>
   );
