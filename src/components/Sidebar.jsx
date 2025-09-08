@@ -16,6 +16,7 @@ import Cone from "./icons/Cone";
 import Cylinder from "./icons/Cylinder";
 import "./Sidebar.css";
 import GitHub from "./icons/GitHub";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -135,6 +136,10 @@ export default function Sidebar() {
         {isOpen ? "<" : ">"}
       </button>
       <div id="sidebar-content">
+        <div className="sidebar-section-title">Settings</div>
+        <div>
+          <ThemeSwitcher />
+        </div>
         <div className="sidebar-section-title">User Colors</div>
         <textarea
           placeholder={
